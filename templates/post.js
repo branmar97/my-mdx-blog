@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 const Post = ({ children, frontMatter }) => {
-    const { title } = frontMatter;
+    const { title, date } = frontMatter;
     
     return (
         <div>
@@ -11,19 +11,21 @@ const Post = ({ children, frontMatter }) => {
             </Head>
 
             <main>
-                <h1>{title}</h1>
-                <div>
-                    {children}
-                </div>
-            </main>
-
-            <p>
+            <small>
                 <Link href="/">
                     <a>
                         Back to home
                     </a>
                 </Link>
-            </p>
+            </small>
+                <h1>{title}</h1>
+                <small>{date}</small>
+                <div>
+                    {children}
+                </div>
+            </main>
+
+            
         </div>
     )
 }
