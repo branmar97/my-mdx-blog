@@ -8,6 +8,27 @@
   height: 100vh;
 }
 
+.nav {
+  margin: auto;
+  text-align: center;
+  display: flex;
+}
+
+.navitem {
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.navitem a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.navitem a:hover,
+.navitem a:focus,
+.navitem a:active {
+  text-decoration: underline;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;
