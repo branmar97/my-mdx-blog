@@ -4,7 +4,9 @@ import Link from 'next/link'
 import { promises as fs } from 'fs'
 import path from 'path'
 import grayMatter from 'gray-matter'
+import { SocialIcon } from 'react-social-icons'
 import styles from '../styles/Home.module.css'
+import { fileURLToPath } from 'url'
 
 export default function Home({ posts }) {
   return (
@@ -27,6 +29,12 @@ export default function Home({ posts }) {
 
         <Image className={styles.portrait} src="/pic.jpeg" alt="Portrait Photo" width={250} height={250} />
 
+        <div className={styles.icons}>
+          <SocialIcon url="https://github.com/branmar97" bgColor="#0070f3" className={styles.icon} />
+          <SocialIcon url="https://www.linkedin.com/in/brandon-mar" bgColor="#0070f3" className={styles.icon} />
+          <SocialIcon url="https://twitter.com/branmar97" bgColor="#0070f3" className={styles.icon} />
+        </div>
+
         <div className={styles.grid}>
           {posts.map(post => {
             return (
@@ -40,18 +48,6 @@ export default function Home({ posts }) {
           })}
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a href="https://github.com/branmar97">
-
-        </a>
-        <a href="https://www.linkedin.com/in/brandon-mar/">
-          
-        </a>
-        <a href="https://twitter.com/branmar97">
-
-        </a>
-      </footer>
     </div>
   )
 }
