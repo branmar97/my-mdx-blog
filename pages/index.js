@@ -53,7 +53,7 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
-  const postsDirectory = path.join(process.cwd(), 'pages/posts');
+  const postsDirectory = path.join(process.cwd(), 'pages/blog');
   const filenames = await fs.readdir(postsDirectory);
 
   const files = await Promise.all(filenames.map(async filename => {
@@ -68,7 +68,7 @@ export async function getStaticProps() {
 
   const posts = files.map(file => {
     return {
-      path: `/posts/${file.filename.replace('.mdx', '')}`,
+      path: `/blog/${file.filename.replace('.mdx', '')}`,
       title: file.matter.data.title,
       summary: file.matter.data.description
     }
