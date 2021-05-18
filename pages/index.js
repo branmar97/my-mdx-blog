@@ -35,6 +35,12 @@ export default function Home({ posts }) {
           <SocialIcon url="https://twitter.com/branmar97" bgColor="#0070f3" className={styles.icon} />
         </div>
 
+        <div className={styles.nav}>
+            <div className={styles.navitem}><Link href="/about"><a>About</a></Link></div>
+            <div className={styles.navitem}><Link href="/portfolio"><a>Portfolio</a></Link></div>
+            <div className={styles.navitem}><Link href="/blog"><a>Blog</a></Link></div>
+        </div>
+
         <div className={styles.grid}>
           {posts.map(post => {
             return (
