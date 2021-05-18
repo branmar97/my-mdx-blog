@@ -108,9 +108,15 @@
   line-height: 1.5;
 }
 
-.logo {
+.icons {
   height: 1em;
+  margin-top: 1rem;
   margin-left: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.icon {
+  margin: 0 0.5rem 0 0.5rem;
 }
 
 .portrait {
