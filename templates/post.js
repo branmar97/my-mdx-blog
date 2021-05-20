@@ -7,7 +7,7 @@ const Post = ({ children, frontMatter }) => {
     return (
         <div>
             <Head>
-                <title>{title}</title>
+                <title>Brandon Marrero | {title}</title>
             </Head>
 
             <main>
