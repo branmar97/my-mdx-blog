@@ -34,7 +34,7 @@ const About = () => {
                     <div>
                         <h2>How do you approach learning a new concept or tool?</h2>
                         <p>
-                            First I consume content to understand the basics of the tool. I try not to get further than the basics, and I immediately begin applying what I learned. As my understanding solidifies, I dive deeper and use more advanced concepts. This strategy allows me to get an understanding of the fundamentals before fully immersing myself.
+                            First, I consume content about the tool to learn the basics. I try not to get further than the basics, and I immediately begin applying what I learned. As my understanding solidifies, I dive deeper and use more advanced concepts. This strategy allows me to get an understanding of the fundamentals before fully immersing myself.
                         </p>
 
                     </div>
