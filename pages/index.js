@@ -31,10 +31,18 @@ export default function Home({ posts }) {
 
         <Image className={styles.portrait} src="/pic.jpeg" alt="Portrait Photo" width={250} height={250} />
 
-        <div className={styles.icons}>
-          <SocialIcon url="https://github.com/branmar97" bgColor="#0070f3" className={styles.icon} />
-          <SocialIcon url="https://www.linkedin.com/in/brandon-mar" bgColor="#0070f3" className={styles.icon} />
-          <SocialIcon url="https://twitter.com/branmar97" bgColor="#0070f3" className={styles.icon} />
+        <div className={styles.contact}>
+          <h2>Contact Me</h2>
+          <p>
+          <strong>Email:</strong> brandonmar97@gmail.com
+          </p>
+
+          <div className={styles.icons}>
+            <p>Social:</p>
+            <SocialIcon url="https://github.com/branmar97" bgColor="#0070f3" className={styles.icon} />
+            <SocialIcon url="https://www.linkedin.com/in/brandon-mar" bgColor="#0070f3" className={styles.icon} />
+            <SocialIcon url="https://twitter.com/branmar97" bgColor="#0070f3" className={styles.icon} />
+          </div>
         </div>
 
       </main>
