@@ -21,22 +21,22 @@ const About = () => {
                 <div>
                     <div>
                         <h2>Why did you choose Software Engineering?</h2>
-                        <p>
+                        <p className={styles.description}>
                             From tinkering with computers at age 8 to building fullstack web applications, technology has always been a passion of mine. I have always been curious about how things work in the background. If I own something, I want to have at least a basic understanding of how it works.
                         </p>
-                        <p>
+                        <p className={styles.description}>
                             I chose Software Engineering because it allows me to fulfill that value for learning. There is simply so much to learn that I cannot learn it all, and that is one thing that makes this field exciting.
                         </p>
                     </div>
                     <div>
                         <h2>What is your approach to solving a problem with code?</h2>
-                        <p>
+                        <p className={styles.description}>
                             I start by identifying and understanding the problem, then I create a plan to solve that problem. My plan usually consists of what I expect the output to be and how to get it. Once I have a plan, I start writing the actual code. At the end, I look back over my code to refactor and optimize my solution.
                         </p>
                     </div>
                     <div>
                         <h2>How do you approach learning a new concept or tool?</h2>
-                        <p>
+                        <p className={styles.description}>
                             First, I consume content about the tool to learn the basics. I try not to get further than the basics, and I immediately begin applying what I learned. As my understanding solidifies, I dive deeper and use more advanced concepts. This strategy allows me to get an understanding of the fundamentals before fully immersing myself.
                         </p>
 
