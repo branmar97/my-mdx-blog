@@ -11,15 +11,27 @@ const Post = ({ children, frontMatter }) => {
             </Head>
 
             <main>
-            <small>
-                <Link href="/">
-                    <a>
-                        Back to home
-                    </a>
-                </Link>
-            </small>
+                <small>
+                    <Link href="/">
+                        <a>
+                            Back to home
+                        </a>
+                    </Link>
+                </small>
                 <h1>{title}</h1>
-                <small>{date}</small>
+                <div>
+                    <hr />
+                    <div>
+
+                    </div>
+                    <div>
+                        <h3>Brandon Marrero</h3>
+                        <small>Published on <strong>{date}</strong></small>
+
+                    </div>
+                    <hr />
+                </div> 
+                
                 <div>
                     {children}
                 </div>
