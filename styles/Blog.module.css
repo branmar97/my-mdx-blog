@@ -1,5 +1,4 @@
 .container {
-    min-height: 100vh;
     padding: 0 0.5rem;
     display: flex;
     flex-direction: column;
@@ -16,4 +15,51 @@
     justify-content: center;
     align-items: center;
     max-width: 50rem;
+}
+
+.postData small {
+    margin: 0.5rem 1rem 0.5rem 0;
+}
+
+.title {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 2rem;
+}
+  
+.title,
+.description {
+    text-align: left;
+}
+  
+.description {
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
+.portrait {
+    border-radius: 50%;
+}
+
+.authorInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.authorImage {
+    margin: 0 1rem 0 0;
+}
+
+.authorDetails {
+    margin: 0 0 0 1rem;
+}
+
+@media (max-width: 900px) {
+    .main {
+        width: 95%;
+        flex-direction: column;
+    }
 }
