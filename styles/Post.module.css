@@ -1,0 +1,59 @@
+.container {
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.main {
+    padding: 5rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 50rem;
+}
+
+.main a {
+    color: #0070f3;
+    text-decoration: none;
+}
+  
+.main a:hover,
+.main a:focus,
+.main a:active {
+    text-decoration: underline;
+}
+
+.header {
+
+}
+
+.postInfo {
+    width: 100%
+}
+
+.authorInfo {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.authorInfo h3 {
+    margin: 0;
+}
+.authorInfo p {
+    margin: 0.25rem 0 0 0;
+    font-size: 0.75rem;
+}
+
+.authorImage {
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.postContent {
+    line-height: 1.5;
+    font-size: 1rem;
+}
