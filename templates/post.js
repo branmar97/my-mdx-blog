@@ -12,9 +12,9 @@ const Post = ({ children, frontMatter }) => {
 
             <main>
                 <small>
-                    <Link href="/">
+                    <Link href="/blog">
                         <a>
-                            Back to home
+                            Back to Blog
                         </a>
                     </Link>
                 </small>
