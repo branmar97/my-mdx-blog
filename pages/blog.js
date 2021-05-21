@@ -2,11 +2,12 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { promises as fs } from 'fs'
 import path from 'path'
-import grayMatter, { read } from 'gray-matter'
+import grayMatter from 'gray-matter'
 import readTime from '../lib/readTime';
 import styles from '../styles/Blog.module.css'
 
 const Blog = ({ posts }) => {
+
     return (
         <div className={styles.container}>
             <Head>
@@ -50,7 +51,7 @@ export async function getStaticProps() {
     const postsDirectory = path.join(process.cwd(), 'pages/blog');
     const filenames = await fs.readdir(postsDirectory);
 
-    const files = await Promise.all(filenames.map(async filename => {
+    const files = await Promise.all(filenames.reverse().map(async filename => {
         const filePath = path.join(postsDirectory, filename)
         const content = await fs.readFile(filePath, 'utf8')
         const matter = grayMatter(content)
