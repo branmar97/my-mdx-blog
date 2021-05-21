@@ -4,33 +4,39 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import grayMatter, { read } from 'gray-matter'
 import readTime from '../lib/readTime';
+import styles from '../styles/Blog.module.css'
 
 const Blog = ({ posts }) => {
     return (
-        <div >
+        <div className={styles.container}>
             <Head>
                 <title>Brandon Marrero | Blog</title>
                 <meta name="description" content="Brandon Marrero Portfolio" />
                 {/* <link rel="icon" href="/favicon.ico" /> */}
             </Head>
-            <main>
-                <div>
-
-                    <h1>Blog</h1>
-                    <small>Take a look at my posts</small>
+            <main className={styles.main}>
+                <div className={styles.authorInfo}>
+                    <div className={styles.authorImage}>
+                        <img className={styles.portrait} src="/pic.jpeg" alt="Portrait Photo" width="125" />
+                    </div>
+                    <div className={styles.authorDetails}>
+                        <h1 className={styles.title}>Brandon Marrero</h1>
+                        <p className={styles.description}>Web development, programming, technical writing, and my thoughts on the tech industry. I usually post when I want to share something new I learned.</p>
+                    </div>
                 </div>
-                <div>
+                <div className={styles.cards}>
                     {posts.map(post => {
                         return (
-                            <div key={post.path}>
-                                <Link href={post.path}><a><h2>{post.title}</h2></a></Link>
-                                <div>
+                            <div className={styles.card} key={post.path}>
+                                <Link href={post.path}><a><h2>{post.title}</h2>
+                                <div className={styles.postData}>
                                     <small>{post.date}</small> 
                                     <small>{post.readtime} min read</small>
                                 </div>
                                 <div>
-                                    <p>{post.summary}</p>
+                                    <p className={styles.description}>{post.summary}</p>
                                 </div>
+                                </a></Link>
                             </div>
                         )
                     })}
