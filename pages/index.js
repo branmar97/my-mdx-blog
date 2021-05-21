@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 import { SocialIcon } from 'react-social-icons'
 import styles from '../styles/Home.module.css'
@@ -29,7 +28,7 @@ export default function Home({ posts }) {
             <div className={styles.navitem}><Link href="/blog"><a>Blog</a></Link></div>
         </div>
 
-        <Image className={styles.portrait} src="/pic.jpeg" alt="Portrait Photo" width={250} height={250} />
+        <img className={styles.portrait} src="/pic.jpeg" alt="Portrait Photo" width="250" />
 
         <div className={styles.contact}>
           <h2>Contact Me</h2>
