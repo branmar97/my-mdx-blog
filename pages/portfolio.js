@@ -11,15 +11,18 @@ const Portfolio = () => {
             </Head>
             <main className={styles.main}>
                 <div>
-                    <h1>Portfolio</h1>
-                    <small>I build projects to help strengthen my knowledge and skills in Ruby, JavaScript and other technologies.</small>
+                    <h1 className={styles.title}>Portfolio</h1>
+                    <p className={styles.description}>I build projects to help strengthen my knowledge and skills in Ruby, JavaScript and other technologies.</p>
+                </div>
+                <div>
+                    <h2>Current Project</h2>
                 </div>
                 <div>
                     <div>
-                        Project 1
+                        <h3>Apex Link</h3>
                     </div>
                     <div>
-                        Project 2
+                        <h3>Bundl</h3>
                     </div>
                     <div>
                         Project 3
