@@ -12,7 +12,7 @@ const About = () => {
             <main className={styles.main}>
                 
                 <h1 className={styles.title}>About Me</h1>
-                <small className={styles.blurb}>I commit my code to <a href="https://github.com/branmar97">Github</a> and share my journey on <a href="https://www.linkedin.com/in/brandon-mar/">LinkedIn</a> and <a href="https://twitter.com/branmar97">Twitter</a>.</small>
+                <p className={styles.blurb}>I commit my code to <a href="https://github.com/branmar97">Github</a> and share my journey on <a href="https://www.linkedin.com/in/brandon-mar/">LinkedIn</a> and <a href="https://twitter.com/branmar97">Twitter</a>.</p>
                 <div className={styles.header}>
                     <p className={styles.description}>I'm based in Newport News, Virginia. I enjoy 🤓 programming, 📖 reading, ✍️ writing, 👨‍🍳 cooking, 🕹️ playing games, and 🎥 creating video content. I 🎓 graduated from Flatiron School, a Software Engineering bootcamp where I learned how to build web applications using technologies, such as, ReactJS, Ruby on Rails, JavaScript and HTML/CSS. 🚀 Seeking an opportunity for the fulfillment of my passion for software engineering.
                     </p>
