@@ -5,6 +5,19 @@ import styles from '../styles/Post.module.css'
 const Post = ({ children, frontMatter }) => {
     const { title, date } = frontMatter;
     
+    const getMonthName = (month) => {
+        const d = new Date();
+        d.setMonth(month-1);
+        const monthName = d.toLocaleString("default", {month: "long"});
+        return monthName;
+    }
+    
+    const formattedDate = (date) => {
+        const dateChunks = date.split("/")
+        const newDate = `${getMonthName(dateChunks[1])} ${dateChunks[0]}, ${dateChunks[2]}`
+        return newDate
+    }
+
     return (
         <div className={styles.container}>
             <Head>
@@ -31,7 +44,7 @@ const Post = ({ children, frontMatter }) => {
                             </div>
                             <div>
                                 <h3>Brandon Marrero</h3>
-                                <p>Published on <strong>{date}</strong></p>
+                                <p>Published on <strong>{formattedDate(date)}</strong></p>
                             </div>
                         </div>
                     </div>
