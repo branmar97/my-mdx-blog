@@ -22,6 +22,12 @@ export default function Home({ posts }) {
           <code className={styles.code}>Content Creator</code>
         </p>
 
+        <div className={styles.nav}>
+            <div className={styles.navitem}><Link href="/about"><a>About</a></Link></div>
+            <div className={styles.navitem}><Link href="/portfolio"><a>Portfolio</a></Link></div>
+            <div className={styles.navitem}><Link href="/blog"><a>Blog</a></Link></div>
+        </div>
+
         <img className={styles.portrait} src="/pic.jpeg" alt="Portrait Photo" width="250" />
 
         <div className={styles.contact}>

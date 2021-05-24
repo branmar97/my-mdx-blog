@@ -44,6 +44,27 @@
   color: #252525;
 }
 
+.nav {
+  margin: 1rem 0 2rem 0;
+  text-align: center;
+  display: flex;
+}
+
+.navitem {
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.navitem a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.navitem a:hover,
+.navitem a:focus,
+.navitem a:active {
+  text-decoration: underline;
+}
+
 .contact {
   margin: 1rem 0 0 0;
   text-align: center;
@@ -82,4 +103,10 @@
 
 .portrait {
   border-radius: 50%;
+}
+
+@media (max-width: 600px) {
+  .code {
+    font-size: 0.95rem;
+  }
 }
