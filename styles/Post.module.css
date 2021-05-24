@@ -26,10 +26,6 @@
     text-decoration: underline;
 }
 
-.header {
-
-}
-
 .postInfo {
     width: 100%
 }
@@ -56,4 +52,8 @@
 .postContent {
     line-height: 1.5;
     font-size: 1rem;
+}
+
+.postContent p {
+    color: #252525;
 }
