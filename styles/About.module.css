@@ -24,8 +24,11 @@
     margin-bottom: 1rem;
 }
 
-.main a {
+.blurb a {
     color: #0070f3;
+}
+
+.main a {
     text-decoration: none;
   }
   
