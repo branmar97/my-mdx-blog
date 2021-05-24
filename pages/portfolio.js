@@ -36,7 +36,7 @@ const Portfolio = () => {
                             </p>
                         </div>
                         <div className="project-links">
-                            <a href="https://github.com/patrick-rush/fitr-frontend"><button>
+                            <a href="https://github.com/patrick-rush/fitr-frontend"><button className={styles.button}>
                                 View Code
                             </button></a>
                         </div>
@@ -66,10 +66,10 @@ const Portfolio = () => {
                             </p>
                         </div>
                         <div className="project-links">
-                            <a href="https://www.youtube.com/watch?v=iDxkqqi3Dqw&t=2s"><button>
+                            <a href="https://www.youtube.com/watch?v=iDxkqqi3Dqw&t=2s"><button className={styles.button}>
                                 Demo
                             </button></a>
-                            <a href="https://github.com/branmar97/apexlink-frontend"><button>
+                            <a href="https://github.com/branmar97/apexlink-frontend"><button className={styles.button}>
                                 View Code
                             </button></a>
                         </div>
@@ -99,10 +99,10 @@ const Portfolio = () => {
                             </p>
                         </div>
                         <div className="project-links">
-                            <a href="https://www.youtube.com/watch?v=pnDAT-erJuM"><button>
+                            <a href="https://www.youtube.com/watch?v=pnDAT-erJuM"><button className={styles.button}>
                                 Demo
                             </button></a>
-                            <a href="https://github.com/branmar97/bundl-rails"><button>
+                            <a href="https://github.com/branmar97/bundl-rails"><button className={styles.button}>
                                 View Code
                             </button></a>
                         </div>
