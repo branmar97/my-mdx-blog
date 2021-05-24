@@ -5,6 +5,7 @@ import path from 'path'
 import grayMatter from 'gray-matter'
 import readTime from '../lib/readTime';
 import styles from '../styles/Blog.module.css'
+import Nav from '../lib/nav'
 
 const Blog = ({ posts }) => {
     const getMonthName = (month) => {
@@ -28,6 +29,7 @@ const Blog = ({ posts }) => {
                 {/* <link rel="icon" href="/favicon.ico" /> */}
             </Head>
             <main className={styles.main}>
+                {Nav()}
                 <div className={styles.authorInfo}>
                     <div className={styles.authorImage}>
                         <img className={styles.portrait} src="/pic.jpeg" alt="Portrait Photo" width="125" />

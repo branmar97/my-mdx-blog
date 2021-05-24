@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Post.module.css'
+import Nav from '../lib/nav'
 
 const Post = ({ children, frontMatter }) => {
     const { title, date } = frontMatter;
@@ -25,6 +26,7 @@ const Post = ({ children, frontMatter }) => {
             </Head>
 
             <main className={styles.main}>
+                {Nav()}
                 <div className={styles.header}>
                 <small>
                     <Link href="/blog">

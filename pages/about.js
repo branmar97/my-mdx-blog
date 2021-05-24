@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/About.module.css'
+import Nav from '../lib/nav'
 
 const About = () => {
     return (
@@ -10,7 +11,7 @@ const About = () => {
                 {/* <link rel="icon" href="/favicon.ico" /> */}
             </Head>
             <main className={styles.main}>
-                
+                {Nav()}
                 <h1 className={styles.title}>About Me</h1>
                 <p className={styles.blurb}>I commit my code to <a href="https://github.com/branmar97">Github</a> and share my journey on <a href="https://www.linkedin.com/in/brandon-mar/">LinkedIn</a> and <a href="https://twitter.com/branmar97">Twitter</a>.</p>
                 <div className={styles.header}>

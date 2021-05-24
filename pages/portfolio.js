@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Portfolio.module.css'
+import Nav from '../lib/nav'
 
 const Portfolio = () => {
     return (
@@ -10,6 +11,7 @@ const Portfolio = () => {
                 {/* <link rel="icon" href="/favicon.ico" /> */}
             </Head>
             <main className={styles.main}>
+            {Nav()}
             <h1 className={styles.title}>Portfolio</h1>
             <p className={styles.blurb}>I build projects to help strengthen my knowledge and skills in Ruby, JavaScript, React and other technologies.</p>
             <div>
