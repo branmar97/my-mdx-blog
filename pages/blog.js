@@ -7,6 +7,18 @@ import readTime from '../lib/readTime';
 import styles from '../styles/Blog.module.css'
 
 const Blog = ({ posts }) => {
+    const getMonthName = (month) => {
+        const d = new Date();
+        d.setMonth(month-1);
+        const monthName = d.toLocaleString("default", {month: "long"});
+        return monthName;
+    }
+    
+    const formattedDate = (date) => {
+        const dateChunks = date.split("/")
+        const newDate = `${getMonthName(dateChunks[1])} ${dateChunks[0]}, ${dateChunks[2]}`
+        return newDate
+    }
 
     return (
         <div className={styles.container}>
@@ -31,7 +43,7 @@ const Blog = ({ posts }) => {
                             <div className={styles.card} key={post.path}>
                                 <Link href={post.path}><a><h2>{post.title}</h2>
                                 <div className={styles.postData}>
-                                    <small>{post.date}</small> 
+                                    <small>{formattedDate(post.date)}</small> 
                                     <small>{post.readtime} min read</small>
                                 </div>
                                 <div>
@@ -73,9 +85,15 @@ export async function getStaticProps() {
         }
     })
 
+    const sortedPosts = posts.sort(function(a, b){
+        let aa = a.date.split('/').reverse().join(),
+            bb = b.date.split('/').reverse().join();
+        return aa < bb ? -1 : (aa > bb ? 1 : 0);
+    });
+
     return {
         props: {
-        posts
+        posts: sortedPosts.reverse()
         }
     }
 }
