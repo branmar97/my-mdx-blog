@@ -37,6 +37,10 @@
     color: #252525;
 }
 
+.postTitle {
+    color: #0070f3;
+}
+
 .portrait {
     border-radius: 50%;
 }

@@ -41,7 +41,7 @@ const Blog = ({ posts }) => {
                     {posts.map(post => {
                         return (
                             <div className={styles.card} key={post.path}>
-                                <Link href={post.path}><a><h2>{post.title}</h2>
+                                <Link href={post.path}><a><h2 className={styles.postTitle}>{post.title}</h2>
                                 <div className={styles.postData}>
                                     <small>{formattedDate(post.date)}</small> 
                                     <small>{post.readtime} min read</small>
