@@ -13,7 +13,7 @@ const Portfolio = () => {
             <main className={styles.main}>
             {Nav()}
             <h1 className={styles.title}>Portfolio</h1>
-            <p className={styles.blurb}>I build projects to help strengthen my knowledge and skills in Ruby, JavaScript, React and other technologies.</p>
+            <p className={styles.blurb}>I build side projects to help strengthen my knowledge and skills in Ruby, JavaScript, React and other technologies for web applications.</p>
             <div>
                 <div className={styles.project}>
                     <a href="https://github.com/patrick-rush/fitr-frontend"><h2 className={styles.smallTitle}>FITR</h2></a>
@@ -34,7 +34,7 @@ const Portfolio = () => {
                                 <li>TailwindCSS</li>
                             </ul>
                             <p className={styles.description}>
-                                This projects integrates Rails in API mode, React, Redux, React Router, JEST testing, Devise for Auth, ActiveStorage for file uploads, and JSON Serializer for formatting JSON responses.
+                                This project integrates Rails in API mode, React, Redux, React Router, JEST testing, Devise for Auth, ActiveStorage for file uploads, and JSON Serializer for formatting JSON responses.
                             </p>
                         </div>
                         <div className="project-links">
@@ -64,7 +64,7 @@ const Portfolio = () => {
                                 <li>TailwindCSS</li>
                             </ul>
                             <p className={styles.description}>
-                                This projects integrates Rails in API mode, React, Redux, React Router, Devise for Auth, and JSON Serializer for formatting JSON responses.
+                                This project integrates Rails in API mode, React, Redux, React Router, Devise for Auth, and JSON Serializer for formatting JSON responses.
                             </p>
                         </div>
                         <div className="project-links">
@@ -97,7 +97,7 @@ const Portfolio = () => {
                                 <li>OAuth</li>
                             </ul>
                             <p className={styles.description}>
-                                This projects integrates Ruby on Rails, Devise for Auth, OAuth Facebook and Bootstrap.
+                                This project integrates Ruby on Rails, Devise for Auth, OAuth Facebook and Bootstrap.
                             </p>
                         </div>
                         <div className="project-links">
