@@ -12,6 +12,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     max-width: 50rem;
 }
 
@@ -56,4 +57,15 @@
 
 .postContent p {
     color: #252525;
+}
+
+.postContent img {
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .main {
+        width: 95%;
+        flex-direction: column;
+    }
 }
