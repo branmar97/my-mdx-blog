@@ -1,32 +1,10 @@
 .container {
-  min-height: 100vh;
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-}
-
-.nav {
-  margin: 1rem 0 2rem 0;
-  text-align: center;
-  display: flex;
-}
-
-.navitem {
-  margin: 0 0.5rem 0 0.5rem;
-}
-
-.navitem a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.navitem a:hover,
-.navitem a:focus,
-.navitem a:active {
-  text-decoration: underline;
+  height: auto;
 }
 
 .main {
@@ -63,6 +41,7 @@
 .description {
   line-height: 1.5;
   font-size: 1.5rem;
+  color: #252525;
 }
 
 .contact {
