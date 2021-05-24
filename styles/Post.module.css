@@ -17,7 +17,6 @@
 }
 
 .main a {
-    color: #0070f3;
     text-decoration: none;
 }
   
@@ -53,6 +52,10 @@
 .postContent {
     line-height: 1.5;
     font-size: 1rem;
+}
+
+.postContent a {
+    color: #0070f3;
 }
 
 .postContent p {
