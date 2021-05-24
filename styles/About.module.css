@@ -26,17 +26,14 @@
 
 .blurb a {
     color: #0070f3;
-}
-
-.main a {
     text-decoration: none;
-  }
+}
   
-  .main a:hover,
-  .main a:focus,
-  .main a:active {
+.blurb a:hover,
+.blurb a:focus,
+.blurb a:active {
     text-decoration: underline;
-  }
+}
 
 .header {
     display: flex;
