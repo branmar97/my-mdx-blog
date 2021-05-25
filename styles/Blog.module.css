@@ -71,3 +71,22 @@
         flex-direction: column;
     }
 }
+
+@media (max-width: 450px) {
+    .authorInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        margin-bottom: 2rem;
+    }
+    
+    .authorImage {
+        margin: 0 0 1rem 0;
+    }
+    
+    .authorDetails {
+        margin: 0;
+    }
+}
