@@ -16,6 +16,17 @@
     max-width: 50rem;
 }
 
+.content a {
+    color: #0070f3;
+    text-decoration: none;
+}
+
+.content a:hover,
+.content a:focus,
+.content a:active {
+    text-decoration: underline;
+}
+
 .postInfo {
     width: 100%
 }
@@ -42,17 +53,6 @@
 .postContent {
     line-height: 1.5;
     font-size: 1rem;
-}
-
-.postContent a {
-    color: #0070f3;
-    text-decoration: none;
-}
-
-.postContent a:hover,
-.postContent a:focus,
-.postContent a:active {
-    text-decoration: underline;
 }
 
 .postContent p {

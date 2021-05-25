@@ -27,34 +27,36 @@ const Post = ({ children, frontMatter }) => {
 
             <main className={styles.main}>
                 {Nav()}
-                <div className={styles.header}>
-                <small>
-                    <Link href="/blog">
-                        <a>
-                            Back to Blog
-                        </a>
-                    </Link>
-                </small>
-                <h1>{title}</h1>
-                </div>
-                <div className={styles.postInfo}>
-                    <hr />
-                    <div>
-                        <div className={styles.authorInfo}>
-                            <div>
-                                <img className={styles.authorImage} src="/pic.jpeg" alt="Portrait Photo" width="75" />
-                            </div>
-                            <div>
-                                <h3>Brandon Marrero</h3>
-                                <p>Published on <strong>{formattedDate(date)}</strong></p>
+                <div className={styles.content}>
+                    <div className={styles.header}>
+                    <small>
+                        <Link href="/blog">
+                            <a>
+                                Back to Blog
+                            </a>
+                        </Link>
+                    </small>
+                    <h1>{title}</h1>
+                    </div>
+                    <div className={styles.postInfo}>
+                        <hr />
+                        <div>
+                            <div className={styles.authorInfo}>
+                                <div>
+                                    <img className={styles.authorImage} src="/pic.jpeg" alt="Portrait Photo" width="75" />
+                                </div>
+                                <div>
+                                    <h3>Brandon Marrero</h3>
+                                    <p>Published on <strong>{formattedDate(date)}</strong></p>
+                                </div>
                             </div>
                         </div>
+                        <hr />
+                    </div> 
+                    
+                    <div className={styles.postContent}>
+                        {children}
                     </div>
-                    <hr />
-                </div> 
-                
-                <div className={styles.postContent}>
-                    {children}
                 </div>
             </main>
 
