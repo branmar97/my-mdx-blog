@@ -63,6 +63,22 @@
     width: 100%;
 }
 
+.postContent pre {
+    color: #fff;
+    background-color: black;
+    border-radius: 3px;
+    padding: .7rem .7rem;
+}
+
+.postContent code {
+    line-height: 1;
+    font-family: courier, monospace;
+    color: #fff;
+    background-color: black;
+    border-radius: 3px;
+    padding: .2rem .2rem;
+}
+
 @media (max-width: 900px) {
     .main {
         width: 95%;
