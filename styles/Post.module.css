@@ -68,10 +68,11 @@
     background-color: black;
     border-radius: 3px;
     padding: .7rem .7rem;
+    overflow-x: scroll; 
 }
 
 .postContent code {
-    line-height: 1;
+    line-height: 2;
     font-family: courier, monospace;
     color: #fff;
     background-color: black;
