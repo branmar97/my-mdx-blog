@@ -1,0 +1,91 @@
+---
+title: Asynchronous Redux using Redux Thunk
+layout: 'post'
+description: Most applications are making at least one API call, and unfortunately, Redux is not setup for this outside of the box. This is because action creators cannot return functions and is synchronous by default. Redux Thunk was created by Dan Abramov to fill this gap.
+date: 11/04/2021
+---
+
+![Redux Thunk Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3psu9opx7qovkdh4dkx8.png)
+
+[Redux](https://github.com/reduxjs/redux) is a great tool for managing state in large scale applications. It has a single state container called the store, which can be managed using actions and reducers. With Redux, your state is accessible throughout your application tree using dispatchers. 
+
+Most applications are making at least one API call, and unfortunately, Redux is not setup for this outside of the box. This is because action creators cannot return functions and is synchronous by default. [Redux Thunk](https://github.com/reduxjs/redux-thunk) was created by Dan Abramov to fill this gap.
+
+## Prerequisites 
+
+This post assumes you have some basic knowledge of React and Redux. I do not explain the finer details of Redux, such as mapping state and dispatch. For a great introduction to Redux, checkout this [tutorial](https://redux.js.org/tutorials/essentials/part-1-overview-concepts).
+
+## What is Redux Thunk?
+
+In Redux, action creators are expected to return objects. However, using Redux Thunk allows us to pass functions within our action creators to create an asynchronous Redux.
+
+This means that Redux Thunk can be used to make API requests, delay a dispatch, or set dispatch conditions. Essentially, it provides full control over the dispatch method.
+
+
+## Getting Started
+
+In my opinion, the best way to learn how Redux Thunk works is to see it in action. View the example below with very concise explanations.
+
+Install the <i>redux-thunk</i> package by typing `npm install redux-thunk` in your terminal.
+
+Then you need to import <i>applyMiddleware</i> from redux and <i>thunk</i> from redux-thunk. The `applyMiddleware()` method will be the second argument to your `createStore()` method. 
+
+Pass in thunk as your argument for `applyMiddleware()`. It should look something like this.
+
+```
+createStore(rootReducer, applyMiddleware(thunk));
+```
+
+Finally, build your new action creator. In this example, we are making a fetch request to an API.
+
+```
+export const fetchFromApi = () => {
+    return dispatch => {
+        fetch('http://localhost:3001/data')
+        .then(response => {
+          return response.json()
+        })
+        .then(responseJSON => {
+          dispatch({ type: 'GET_DATA', data: responseJSON })
+        })
+    }
+} 
+```
+
+## How Does It Work?
+
+In this scenario we are calling our action creator within the `componentDidMount()` method of a React component. The action creator becomes available as a prop here. 
+
+If you want more information about mapping props see the documentation [here](https://react-redux.js.org/using-react-redux/connect-mapdispatch).
+
+Once the component mounts, the `fetchFromApi()` action is called. This action contains a function with a fetch request to our API. 
+
+```
+componentDidMount() {
+        this.props.fetchFromApi()
+}    
+```
+
+Redux Thunk then calls this function. The application is still functional while the request is working in the background without the user needing to wait for the promise to resolve. 
+
+```
+return dispatch => {
+    fetch(`http://localhost:3001/data`)
+    .then(response => {
+      return response.json()
+    })
+    .then(responseJSON => {
+      dispatch({ type: 'GET_DATA', data: responseJSON })
+    })
+}
+```
+
+Once the promise has resolved, the response is returned. In this case, we convert the response to a readable JSON format using the <i>json()</i> method provided by native JavaScript. The converted response is then dispatched to a reducer where the store is updated.
+
+```
+dispatch({ type: 'GET_DATA', data: responseJSON })
+```
+
+After the store is updated the component is reloaded. If everything is set up correctly, the new data should be available via the store.
+
+Ta-Da! You can now make asynchronous action creators within your React application.
