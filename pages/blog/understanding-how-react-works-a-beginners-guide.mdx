@@ -1,0 +1,78 @@
+---
+title: Understanding How React Works - A Beginner's Guide
+layout: 'post'
+description: Are you thinking about learning React to build your next web application, but do not understand how it works? After reading this brief post, you will have a basic understanding of the React flow to get you headed in the right direction. Your React journey starts here.
+date: 27/04/2021
+---
+
+Are you thinking about learning React to build your next web application, but do not understand how it works? 
+
+After reading this brief post, you will have a basic understanding of the React flow to get you headed in the right direction. Your React journey starts here.
+
+## What is React?
+
+[React](https://reactjs.org/) is a front-end JavaScript library that helps developers quickly build dynamic user interfaces. In an MVC application (Model View Controller), React is the view layer, which is what the user can see and interact with. The view layer can update without reloading the webpage when changes are made.
+It has a component architecture that allows reusable code which can be rendered anywhere.
+
+## What is the format?
+
+Using declarative programming, React makes code easy to read and debug. Declarative programming expresses the logic without displaying all the instructions happening in the background. 
+
+Let me break that down...
+
+A declarative view is like a customer ordering a cake from a bakery. The customer explains how they expect the cake to look and the baker makes it without specific instructions from the customer. This is declarative programming in a nutshell.
+
+Here is a code sample. 
+
+```
+function App() {
+     return (
+          <div className="app">
+               <Nav />
+               <Home />
+               <Footer />
+          </div>
+     );
+}
+```
+
+What can we expect from this output? We are rendering a navigation bar, home screen, and footer. 
+
+You may also notice what looks like an HTML element (div), but this is actually [JSX](https://reactjs.org/docs/introducing-jsx.html), a React element or extension of JavaScript. The JSX is compiled by Babel into regular JavaScript.
+
+This is another example of declarative programming. We specify a React Element, which then gets compiled into JavaScript which creates and appends the HTML element to the DOM. 
+
+Read more on JSX [here](https://reactjs.org/docs/introducing-jsx.html).
+
+## What are components?
+
+[Components](https://reactjs.org/docs/components-and-props.html) are parts that represent pieces of the user interface. Going back to the previous example regarding declarative programming, the components were Nav, Home, and Footer. 
+
+These components are children of the root component, typically called the App component. Combining all the components together makes an application. 
+
+Components are also reusable with different properties. As data changes, a component can update the information and styling.
+
+## How does React flow?
+
+In React, data flows in one direction, top to bottom. This allows for predictable and maintainable code. Data is passed down from the parent component in the form of [props](https://reactjs.org/docs/components-and-props.html#gatsby-focus-wrapper). The data can be used in other forms or passed further down the component tree.
+
+![Component Flow Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/m17ji4j257qh9m6tfjg0.png)
+
+Each component has its own [state](https://reactjs.org/docs/faq-state.html#gatsby-focus-wrapper), similar to props but private. It stores property values that belong to a component. Property values can be changed using a method called `setState()`. By default, a component will re-render when state is changed.
+
+Using state and props together allows breaking down of components based on specific behaviors. Let's say a `PlantsContainer` has a state property with a list of plants. 
+
+The `PlantsForm` component would render a form for adding new plants and a `Plants` component might render the list of plants to the user interface.
+
+## Conclusion
+
+Thanks for reading my blog post. I hope this post helped you understand the basics of React. If it still seems overwhelming, React can be broken down into 4 key concepts:
+
+- Components
+- JSX
+- State
+- Props
+
+I will be touching more on these concepts in future posts.
+
+To learn more about React, I recommend referencing the [official docs](https://reactjs.org/docs/getting-started.html).
