@@ -22,7 +22,7 @@ const Post = ({ children, frontMatter }) => {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Brandon Marrero | {title}</title>
+                <title>{title} | Brandon Marrero</title>
             </Head>
 
             <main className={styles.main}>
