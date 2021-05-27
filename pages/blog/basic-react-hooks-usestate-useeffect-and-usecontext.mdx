@@ -1,0 +1,220 @@
+---
+title: Basic React Hooks - useState, useEffect, and useContext
+layout: 'post'
+description: Hooks allow use of special React functions without class components. They can be used to maintain state, update data, grab HTML elements, and more. In this blog post, we will cover why Hooks are necessary and the main ones you need to know.
+date: 10/05/2021
+---
+
+Hooks allow use of special React functions without class components. They can be used to maintain state, update data, grab HTML elements, and more.
+
+In this blog post, we will cover why Hooks are necessary and the main ones you need to know.
+
+Let's get started.
+
+## Introduction
+
+Before [Hooks](https://reactjs.org/docs/hooks-intro.html), class components were required to take advantage of special React functions (state, lifecycle methods, etc). 
+
+The problem is that class components require much more boilerplate, making them difficult to read and update.
+
+### Class Component
+
+Must have a `constructor` and call `this.state` to access a piece of state.
+
+```
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        {this.state.count}
+      </div>
+  }
+}
+```
+
+### Functional Equivalent
+
+Creates the equivalent of the above component in just a few lines. It does not require use of the `this` keyword to access state and is much easier to read.
+
+```
+function App() {
+   const [count] = useState(0);
+
+   return <div>{count}</div>
+}
+```
+
+## Prerequisites
+
+Before we dive into the 3 basic React Hooks, there are two important rules to remember. 
+
+1. You **must import any hooks** that you use
+2. Hooks **can only be called at the top level** of your functional components
+
+This is what those rules look like in practice.
+
+```
+import { useState } from 'react'
+
+function App() {
+   const [count] = useState(0)
+
+   const multiplyCount = () => {
+      return count * 2
+   }
+
+   return <div>{count}</div>
+}
+```
+
+Now let's take a look at the 3 main [Hooks](https://reactjs.org/docs/hooks-intro.html).
+
+## useState()
+
+This hook is called to add local state to a component. It returns a pair with the current value and a function to update that value. The value initially passed to `useState()` is display on the first render. 
+
+`useState()` provides more flexibility than `this.state` because state can be either an object or regular value. It can also be accessed and changed based on variable names you define.
+
+When state changes, React will automatically update the UI.
+
+```
+function VisitorCount() {
+   count [count, setCount] = useState(0)
+
+   return (
+      <div>
+         <p>{count} Visitors</p>
+         <button 
+            onClick={() => setCount(count + 1)}>
+            Increment
+         </button>
+      </div>
+   )
+}
+```
+
+## useEffect()
+
+In class components, we have access to [lifecycle methods](https://www.w3schools.com/react/react_lifecycle.asp), such as, `componentDidMount()`, `componentDidUpdate()` and `componentWillUnmount()`. 
+
+```
+componentdidMount() {
+   // The component has initialized
+}
+
+componentDidUpdate() {
+   // The component state has changed
+}
+
+componentWillUnmount() {
+   // The component is destroyed 
+}
+```
+
+With the `useEffect()` hook, all of these are unified under one function. 
+
+It accepts a function as its first argument and runs once on initialization, and again after each state change.
+
+```
+useEffect(() => {
+ console.log('Hello World!')
+})
+```
+
+#### Call When Updated
+
+You may want to only run a function on initialization, or if a specific piece of state changes. 
+
+To do this, pass an array as a second argument to `useEffect()`. This is called the dependencies array.
+
+An empty array will cause the function to run on the first render, and an array with state added will only call the function when that state is updated.
+
+```
+useEffect(
+   () => {
+      fetch('http://localhost:3000/data')
+      .then(response => {
+         console.log(response.json())
+      })
+   {,
+   [count] // function called when count is updated
+)
+```
+
+In the above example, the function will only be called when `count` has changed.
+
+#### Call When Destroyed
+
+To call a function before a component is removed from the UI, simply return a function within `useEffect()`.
+
+```
+useEffect(() => {
+   console.log('Hello!')
+
+   return () => console.log('Bye Felicia!')
+   },
+   []
+)
+```
+
+## useContext()
+
+In React, data is shared one-way by passing [props](https://reactjs.org/docs/components-and-props.html) down the component tree. 
+
+Passing data from the top of the tree to the third level requires passing props to two components. 
+
+![Data Flow](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8xm3dn7jgk2hzhkuq4ic.png)
+
+`useContext()` simplifies this process by allowing props to be shared anywhere in a component tree. 
+
+#### Creating Context
+
+To create context, we pass an object to `useContext()`, then create a provider to make this object accessible throughout the tree.
+
+```
+const hunger = {
+   hungry: 'You are hungry',
+   full: 'You feel full',
+}
+
+const HungerContext = createContext(hunger)
+
+function App(props) {
+
+   return (
+      <HungerContext.Provider value={hunger.full} >
+         <Hungry />
+      </HungerContext.Provider> 
+}
+```
+
+Now the hunger value can be carried down without passing props between child components.
+
+#### Accessing Context
+
+We also utilize the `useContext()` hook to access any context we create, no matter where the component is in the tree.
+
+```
+function Hungry() {
+   const hunger = useContext(HungerContext)
+
+   return <p>{hunger}</p>
+}
+```
+
+This component will display the provided hunger value, and update whenever that value changes.
+
+## Conclusion
+
+Thanks for reading my blog post. I hope this post helped you understand the basic React Hooks. 
+
+I will be touching more on these hooks in future posts covering functional components.
+
+To learn more about React Hooks, checkout the [official docs](https://reactjs.org/docs/hooks-overview.html).
