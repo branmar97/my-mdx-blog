@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Portfolio.module.css'
 import Nav from '../lib/nav'
+import ImageSlider from '../lib/ImageSlider'
 
 const Portfolio = () => {
     return (
@@ -16,9 +17,9 @@ const Portfolio = () => {
             <p className={styles.blurb}>I build side projects to help strengthen my knowledge and skills in Ruby, JavaScript, React and other technologies for web applications.</p>
             <div>
                 <div className={styles.project}>
+                    <img className={styles.portfolioImage} src="/portfolio/fitr/01-image.png" alt="FITR web design" />
                     <a href="https://github.com/patrick-rush/fitr-frontend"><h2 className={styles.smallTitle}>FITR</h2></a>
                     <p className={styles.subtitle}>Single-Page Web Application</p>
-                    <img className={styles.portfolioImage} src="/portfolio/fitr/01-image.png" alt="FITR web design" />
                     <div className="project-details">
                         <div className="project-summary">
                             <h4>Summary</h4>
@@ -46,9 +47,9 @@ const Portfolio = () => {
                 </div>
                 <hr />
                 <div className={styles.project}>
-                <a href="https://github.com/branmar97/apexlink-frontend"><h2 className={styles.smallTitle}>Apex Link</h2></a>
+                    <ImageSlider project="apexlink" />
+                    <a href="https://github.com/branmar97/apexlink-frontend"><h2 className={styles.smallTitle}>Apex Link</h2></a>
                     <p className={styles.subtitle}>Single-Page Web Application</p>
-                    <img className={styles.portfolioImage} src="/portfolio/apex-link/01-image.png" alt="Apex Link" />
                     <div className="project-details">
                         <div className="project-summary">
                             <h4>Summary</h4>
@@ -79,9 +80,9 @@ const Portfolio = () => {
                 </div>
                 <hr />
                 <div className={styles.project}>
-                <a href="https://github.com/branmar97/bundl-rails"><h2 className={styles.smallTitle}>Bundl</h2></a>
+                    <ImageSlider project="bundl" />
+                    <a href="https://github.com/branmar97/bundl-rails"><h2 className={styles.smallTitle}>Bundl</h2></a>
                     <p className={styles.subtitle}>MVC Web Application</p>
-                    <img className={styles.portfolioImage} src="/portfolio/bundl/01-image.png" alt="Bundl" />
                     <div className="project-details">
                         <div className="project-summary">
                             <h4>Summary</h4>
