@@ -42,8 +42,9 @@ const Blog = ({ posts }) => {
                 <div className={styles.cards}>
                     {posts.map(post => {
                         return (
+                            <Link href={post.path}><a>
                             <div className={styles.card} key={post.path}>
-                                <Link href={post.path}><a><h2 className={styles.postTitle}>{post.title}</h2>
+                                <h2 className={styles.postTitle}>{post.title}</h2>
                                 <div className={styles.postData}>
                                     <small>{formattedDate(post.date)}</small> 
                                     <small>{post.readtime} min read</small>
@@ -51,8 +52,9 @@ const Blog = ({ posts }) => {
                                 <div>
                                     <p className={styles.description}>{post.summary}</p>
                                 </div>
-                                </a></Link>
+                                <hr />
                             </div>
+                            </a></Link>
                         )
                     })}
                 </div>
