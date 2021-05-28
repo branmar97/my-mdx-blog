@@ -16,35 +16,6 @@ const Portfolio = () => {
             <h1 className={styles.title}>Portfolio</h1>
             <p className={styles.blurb}>I build side projects to help strengthen my knowledge and skills in Ruby, JavaScript, React and other technologies for web applications.</p>
             <div>
-                <div className={styles.project}>
-                    <img className={styles.portfolioImage} src="/portfolio/fitr/01-image.png" alt="FITR web design" />
-                    <a href="https://github.com/patrick-rush/fitr-frontend"><h2 className={styles.smallTitle}>FITR</h2></a>
-                    <p className={styles.subtitle}>Single-Page Web Application</p>
-                    <div className="project-details">
-                        <div className="project-summary">
-                            <h4>Summary</h4>
-                            <p className={styles.description}>
-                            Currently in its early stages, FITR is a fitness web app with a twist. Users have a profile, followers, workouts, likes, comments, groups and a workout score. Share your fitness activities in posts, images, workout logs and groups. The image above is an initial design for the project. We created this to help provide a clear understanding of the UI and what components would be needed.
-                            </p>
-                        </div>
-                        <div className="project-tech">
-                            <h4>Technologies</h4>
-                            <ul>
-                                <li>Ruby on Rails</li>
-                                <li>ReactJS</li>
-                                <li>TailwindCSS</li>
-                            </ul>
-                            <p className={styles.description}>
-                                This project integrates Rails in API mode, React, Redux, React Router, JEST testing, Devise for Auth, ActiveStorage for file uploads, and JSON Serializer for formatting JSON responses.
-                            </p>
-                        </div>
-                        <div className="project-links">
-                            <a href="https://github.com/patrick-rush/fitr-frontend"><button className={styles.button}>
-                                View Code
-                            </button></a>
-                        </div>
-                    </div>
-                </div>
                 <hr />
                 <div className={styles.project}>
                     <ImageSlider project="apexlink" />
@@ -106,6 +77,36 @@ const Portfolio = () => {
                                 Demo
                             </button></a>
                             <a href="https://github.com/branmar97/bundl-rails"><button className={styles.button}>
+                                View Code
+                            </button></a>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div className={styles.project}>
+                    <img className={styles.portfolioImage} src="/portfolio/fitr/01-image.png" alt="FITR web design" />
+                    <a href="https://github.com/patrick-rush/fitr-frontend"><h2 className={styles.smallTitle}>FITR</h2></a>
+                    <p className={styles.subtitle}>Single-Page Web Application</p>
+                    <div className="project-details">
+                        <div className="project-summary">
+                            <h4>Summary</h4>
+                            <p className={styles.description}>
+                            Currently in its early stages, FITR is a fitness web app with a twist. Users have a profile, followers, workouts, likes, comments, groups and a workout score. Share your fitness activities in posts, images, workout logs and groups. The image above is an initial design for the project. We created this to help provide a clear understanding of the UI and what components would be needed.
+                            </p>
+                        </div>
+                        <div className="project-tech">
+                            <h4>Technologies</h4>
+                            <ul>
+                                <li>Ruby on Rails</li>
+                                <li>ReactJS</li>
+                                <li>TailwindCSS</li>
+                            </ul>
+                            <p className={styles.description}>
+                                This project integrates Rails in API mode, React, Redux, React Router, JEST testing, Devise for Auth, ActiveStorage for file uploads, and JSON Serializer for formatting JSON responses.
+                            </p>
+                        </div>
+                        <div className="project-links">
+                            <a href="https://github.com/patrick-rush/fitr-frontend"><button className={styles.button}>
                                 View Code
                             </button></a>
                         </div>
