@@ -18,6 +18,7 @@
 
 .portfolioImage {
     width: 100%;
+    border-radius: 0.5rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -81,6 +82,60 @@
     background-color: #2e8dfd;
 }
 
+.slide {
+    opacity: 0;
+    transition-duration: 1s ease;
+}
+
+.active {
+    opacity: 1;
+    transition-duration: 1s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider {
+    margin: 2rem 0;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider img {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.arrows {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.leftArrow,
+.rightArrow {
+    font-size: 2rem;
+    color: black;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 2rem;
+}
+
+.leftArrow:hover,
+.rightArrow:hover {
+    transition-duration: 0.5s ease;
+    transform: scale(1.15);
+    color: #686868;
+}
+
 @media (max-width: 600px) {
     .blurb {
         text-align: left;
@@ -92,5 +147,47 @@
     .main {
         width: 95%;
         flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .slider {
+      height: 700px;
+    }
+
+    .leftArrow,
+    .rightArrow {
+        font-size: 3rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .slider {
+      height: 600px;
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .slider {
+      height: 450px;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .slider {
+      height: 325px;
+    }
+}
+
+
+@media only screen and (max-width: 375px) {
+    .slider {
+      height: 275px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .slider {
+      height: 250px;
     }
 }
