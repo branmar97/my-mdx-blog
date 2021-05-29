@@ -68,7 +68,7 @@
     background-color: black;
     border-radius: 3px;
     padding: .7rem .7rem;
-    overflow: scroll; 
+    overflow-x: scroll; 
     -webkit-overflow-scrolling: touch;
 }
 
