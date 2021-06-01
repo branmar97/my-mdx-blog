@@ -16,6 +16,15 @@
     max-width: 50rem;
 }
 
+.header h1 {
+    font-size: 2.75em;
+}
+
+.header img {
+    width: 100%;
+    object-fit: contain;
+}
+
 .content a {
     color: #0070f3;
     text-decoration: none;
@@ -85,5 +94,9 @@
     .main {
         width: 95%;
         flex-direction: column;
+    }
+
+    .header h1 {
+        font-size: 2rem;
     }
 }
