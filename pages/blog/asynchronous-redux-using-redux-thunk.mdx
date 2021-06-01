@@ -6,8 +6,6 @@ date: 11/04/2021
 header: https://i.imgur.com/ryPEq3J.png
 ---
 
-![Redux Thunk Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3psu9opx7qovkdh4dkx8.png)
-
 [Redux](https://github.com/reduxjs/redux) is a great tool for managing state in large scale applications. It has a single state container called the store, which can be managed using actions and reducers. With Redux, your state is accessible throughout your application tree using dispatchers. 
 
 Most applications are making at least one API call, and unfortunately, Redux is not setup for this outside of the box. This is because action creators cannot return functions and is synchronous by default. [Redux Thunk](https://github.com/reduxjs/redux-thunk) was created by Dan Abramov to fill this gap.
@@ -22,6 +20,7 @@ In Redux, action creators are expected to return objects. However, using Redux T
 
 This means that Redux Thunk can be used to make API requests, delay a dispatch, or set dispatch conditions. Essentially, it provides full control over the dispatch method.
 
+![Redux Thunk Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3psu9opx7qovkdh4dkx8.png)
 
 ## Getting Started
 
