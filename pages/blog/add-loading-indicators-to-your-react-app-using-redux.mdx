@@ -1,0 +1,317 @@
+---
+title: Add Loading Indicators To Your React App Using Redux
+layout: 'post'
+description: When making a request, the screen is blank while you wait for it to resolve, but this behavior can be changed. Adding a loading indicator to your app improves the user experience by providing a loading status. In this blog post, we will build this functionality using React Redux.
+date: 01/06/2021
+---
+
+![Loading Indicator](https://i.ibb.co/PwL4fxX/1119.png)
+
+By the end of this blog post, you will have a solid understanding of how to add a loading indicator to your React app. We will be using [Redux](https://redux.js.org/), [Thunk](https://github.com/reduxjs/redux-thunk), and [ReactLoading](https://www.npmjs.com/package/react-loading). 
+
+Adding a loading indicator can greatly enhanced the look and experience for users of your applications. In my opinion, it just looks so much better than staring at a blank screen.
+
+## Prerequisites
+
+This post assumes an understanding of React, Redux, and Thunk. If you are unfamiliar, please read my posts on functional components and Thunk to learn the basics.
+
+You should also have a Redux store configured before starting this tutorial.
+
+## Before We Start
+
+Before we can add our loading indicator, we will need to create an action, reducer, and loading state. 
+
+Here is how those will be put into action:
+
+1. Our `fetchData` action will dispatch the `LOADING_DATA` action type to indicate that our request is being sent.
+2. The loading state will then be set to true and the component that loading state was dispatched to will update. 
+3. An if statement will check the state of loading, which will be true in this case, and the loading indicator will display.
+4. Once the request is resolved, our `GET_DATA` type will be dispatched and the loading state will be set to false, hiding our indicator and displaying the data.
+
+Let's get started!
+
+## Creating the Action
+
+Your action is the source of information for your Redux store. It carries a type attribute and your payload (the data). 
+
+We need to create an action that will return a function that dispatches the `LOADING_DATA` type, fetches the data, and then dispatches the `GET_DATA` type with the JSON response as the payload.
+
+Create a new directory inside the <i>src</i> directory called <i>actions</i>, then create a new file called <i>dataActions.js</i>.
+
+##### /src/actions/dataActions.js
+```
+export const fetchData = () => {
+    return dispatch => {
+        dispatch({ type: 'LOADING_DATA'})
+        fetch('http://localhost:3001/data')
+        .then(response => {
+          return response.json()
+        })
+        .then(responseJSON => {
+          dispatch({ type: 'GET_DATA', payload: responseJSON })
+        })
+    }
+} 
+```
+
+Now we have an action, but this will not actually do anything until we have set up our reducer and component.
+
+## Creating the Reducer
+
+Your reducer determines what changes are made to your application state. It receives a type attribute and sometimes a payload. Our reducer will only have two case types, `LOADING_DATA` and `GET_DATA`.
+
+#### LOADING_DATA
+
+This case will update the loading state to true and maintain the current state. 
+
+#### GET_DATA
+
+This case will update the data state by passing in the payload dispatched by our `fetchData` action and update the loading state to false.
+
+Create a new directory inside the <i>src</i> directory called <i>reducers</i>, then create a new file called <i>dataReducer.js</i>.
+
+##### /src/reducers/dataReducer.js
+```
+const manageData = (state = { data: [], loading: true }, action) => {
+    switch(action.type) {
+        // add cases here
+    }
+}
+
+export default manageData;
+```
+
+This will be our data reducer, which has data and loading as state attributes. Data will be an array of objects with names and ages, and loading will indicate the loading status with a boolean.
+
+Notice that we created a switch statement. We will setup cases inside that block that will tell the reducer what to do for specific action types.
+
+##### /src/reducers/dataReducer.js
+```
+switch(action.type) {
+    case 'LOADING_DATA':
+        return {
+            ...state,
+            data: [...state.data],
+            loading: true
+        }
+    case 'GET_DATA':
+        return {
+            ...state,
+            data: action.payload,
+            loading: false
+        }
+    default:
+        return state;
+}
+```
+
+Now we have our cases. You may notice that the case for `LOADING_DATA` sets the loading state to true, and `GET_DATA` sets it to false. 
+
+This will help us display our loading indicator at the appropriate times once we setup our component.
+
+## Now the Component...
+
+For this tutorial, we will be creating a functional component. Since we need our actions and access to the store, we will be mapping state and dispatch to props. 
+
+Start by creating our function and exporting it. 
+
+##### /src/containers/DataContainer.js
+```
+const DataContainer = () => {
+    return (
+        <div>This return statement is a placeholder and will be deleted later</div>
+    )
+}
+
+export default DataContainer
+```
+
+Add the imports. We will need React and useEffect, connect, and our action.
+
+##### /src/containers/DataContainer.js
+```
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchData } from '../actions/dataActions';
+```
+
+Create a <i>mapStateToProps</i> function underneath DataContainer and before the export to get our data and loading state as props.
+
+##### /src/containers/DataContainer.js 
+```
+const mapStateToProps = state => {
+    return {
+        data: state.data,
+        loading: state.data
+    }
+}
+```
+
+Do the same to pass the <i>fetchData</i> function dispatch as a prop.
+
+##### /src/containers/DataContainer.js
+```
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchData: () => dispatch(fetchData()),
+    }
+}
+```
+
+Update the export by using connect, which takes our new map functions as arguments, and is followed by DataContainer.
+
+##### /src/containers/DataContainer.js
+```
+export default connect(mapStateToProps, mapDispatchToProps)(DataContainer);
+```
+
+Now we can add our new props to the DataContainer.
+
+##### /src/containers/DataContainer.js
+```
+const DataContainer = ({ data, loading, fetchData }) => {
+    return (
+        <div>This return statement is a placeholder and will be deleted later</div>
+    )
+}
+```
+
+We will need to call <i>useEffect</i> to emulate <i>componentDidMount()</i> and call our `fetchData` function when the component mounts. It will go above the return statement in <i>DataContainer</i>.
+
+##### /src/containers/DataContainer.js
+```
+useEffect(() => {
+    fetchData()
+},[])
+```
+
+Each element in our data array contains an object with a name and age. Underneath <i>useEffect</i>, create a function that accepts the data and displays it in an li element.
+
+##### /src/containers/DataContainer.js
+```
+const renderData = (person) => {
+    return {
+        <li>
+            <h1>{person.name}</h1>
+            <p>{person.age}</p>
+        </li>
+    }
+}
+```
+
+With our component setup, we can create an if statement that checks whether loading is true. 
+
+First, delete the return statement within <i>DataContainer</i> and replace it with this. 
+
+##### /src/containers/DataContainer.js
+```
+if (loading) {
+    return (
+        <div>
+            Loading...please wait
+        </div>
+    );
+} else if (!loading) {
+    return ( 
+        <div>
+            <ul>
+                {data.map(person => renderData(person))}
+            </ul>
+        </div>
+    );
+}
+```
+
+There is just one more thing we need to add...a loading icon to spice things up.
+
+Run `npm i react-loading` and import <i>ReactLoading</i> from <i>react-loading</i>.
+
+##### /src/containers/DataContainer.js
+```
+import ReactLoading from 'react-loading';
+```
+
+Return an icon in the first block of the if statement. You can read about customizing the ReactLoading indicator via props [here](https://www.npmjs.com/package/react-loading).
+
+For now we will do a simple spin with the default values.
+
+##### /src/containers/DataContainer.js
+```
+return (
+    <div>
+        <ReactLoading type={'spin'} />
+    </div>
+);
+```
+
+Now your component should look like this...
+
+##### /src/containers/DataContainer.js
+```
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchData } from '../actions/dataActions';
+import ReactLoading from 'react-loading
+
+const DataContainer = ({ data, loading, fetchData }) => {
+    useEffect(() => {
+        fetchData()
+    },[])
+    
+    const renderData = (person) => {
+        return {
+            <li>
+                <h1>{person.name}</h1>
+                <p>{person.age}</p>
+            </li>
+        }
+    }
+
+    if (loading) {
+        return (
+            <div>
+                <ReactLoading type={'spin'} />
+            </div>
+        );
+    } else if (!loading) {
+        return ( 
+            <div>
+                <ul>
+                    {data.map(person => renderData(person))}
+                </ul>
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        data: state.data,
+        loading: state.data
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchData: () => dispatch(fetchData()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DataContainer);
+```
+
+...and here is how it looks in the browser.
+
+### While loading
+
+![Loading Spinner](https://i.ibb.co/hyy3vzH/1118.png)
+
+### After Loading
+
+![Data Content](https://i.ibb.co/3zZJ51D/1117.png)
+
+## Conclusion
+
+Thanks for reading my blog post. I hope this helped you build your first React loading indicator, or taught you a new way of doing it.
+
+You should now understand how to add loading indicators to your React apps. Use this to enhance your UI and make your apps look more professional.
