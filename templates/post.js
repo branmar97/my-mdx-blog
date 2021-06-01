@@ -4,7 +4,7 @@ import styles from '../styles/Post.module.css'
 import Nav from '../lib/nav'
 
 const Post = ({ children, frontMatter }) => {
-    const { title, date } = frontMatter;
+    const { title, date, header } = frontMatter;
     
     const getMonthName = (month) => {
         const d = new Date();
@@ -29,14 +29,15 @@ const Post = ({ children, frontMatter }) => {
                 {Nav()}
                 <div className={styles.content}>
                     <div className={styles.header}>
-                    <small>
-                        <Link href="/blog">
-                            <a>
-                                Back to Blog
-                            </a>
-                        </Link>
-                    </small>
-                    <h1>{title}</h1>
+                        <img src={header} alt="Post Header" />
+                        <h1>{title}</h1>
+                        <small>
+                            <Link href="/blog">
+                                <a>
+                                    Back to Blog
+                                </a>
+                            </Link>
+                        </small>
                     </div>
                     <div className={styles.postInfo}>
                         <hr />
