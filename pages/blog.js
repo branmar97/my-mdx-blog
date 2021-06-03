@@ -44,15 +44,16 @@ const Blog = ({ posts }) => {
                         return (
                             <Link href={post.path}><a>
                             <div className={styles.card} key={post.path}>
+                                <img src={post.header} alt="Post Header Image" />
                                 <h2 className={styles.postTitle}>{post.title}</h2>
                                 <div className={styles.postData}>
                                     <small>{formattedDate(post.date)}</small> 
                                     <small>{post.readtime} min read</small>
                                 </div>
+                                <hr />
                                 <div>
                                     <p className={styles.description}>{post.summary}</p>
                                 </div>
-                                <hr />
                             </div>
                             </a></Link>
                         )
@@ -84,6 +85,7 @@ export async function getStaticProps() {
         path: `/blog/${file.filename.replace('.mdx', '')}`,
         title: file.matter.data.title,
         summary: file.matter.data.description,
+        header: file.matter.data.header,
         date: file.matter.data.date,
         readtime: file.timeToRead
         }
