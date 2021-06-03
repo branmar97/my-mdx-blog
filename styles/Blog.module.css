@@ -16,13 +16,16 @@
     max-width: 50rem;
 }
 
+.postData {
+    margin: 0 0 1rem 0;
+}
+
 .postData small {
     margin: 0.5rem 1rem 0.5rem 0;
 }
 
 .title {
     margin: 0;
-    line-height: 1.15;
     font-size: 2rem;
 }
   
@@ -64,12 +67,18 @@
 .card {
     margin: 2rem 0;
     background-color: rgba(184, 184, 184, 0.2);
-    padding: 0.75rem 2rem;
+    padding: 2rem 2rem;
     border-radius: 0.50rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card hr {
     color: white;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 0.50rem;
 }
 
 @media (max-width: 900px) {
