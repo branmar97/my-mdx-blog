@@ -40,7 +40,7 @@ const Portfolio = () => {
                             </p>
                         </div>
                         <div className="project-links">
-                            <a href="https://www.youtube.com/watch?v=iDxkqqi3Dqw&t=2s"><button className={styles.button}>
+                            <a href="https://apexlink-frontend.vercel.app/"><button className={styles.button}>
                                 Demo
                             </button></a>
                             <a href="https://github.com/branmar97/apexlink-frontend"><button className={styles.button}>
@@ -74,7 +74,7 @@ const Portfolio = () => {
                         </div>
                         <div className="project-links">
                             <a href="https://www.youtube.com/watch?v=pnDAT-erJuM"><button className={styles.button}>
-                                Demo
+                                Video Demo
                             </button></a>
                             <a href="https://github.com/branmar97/bundl-rails"><button className={styles.button}>
                                 View Code
