@@ -1,0 +1,184 @@
+---
+title: Dynamic Form Errors Using React & Rails
+layout: 'post'
+description: text
+date: 20/06/2021
+header: https://i.imgur.com/DinUgHL.png
+---
+
+In this tutorial, we will make custom validation messages and display them dynamicly using React and Redux state. We will build an error helper that creates a paragraph element for each error message.
+
+## Prerequisites
+
+- Set up a Rails API (CORS, database, models, controllers, routes, etc)
+- Set up your React app and forms
+- Create a Redux store
+- Add Redux Thunk
+
+## Rails Back-End
+
+First, we want to setup some validations with custom error messages in our model. In this tutorial, we will call our model Lobby. Our messages will be for the gamemode, region, platform, skill level, and description attributes.
+
+![Lobby Validation Messages](https://i.gyazo.com/6524a7420dfc4c40acd5b4556cf99b84.png)
+
+The above validations will throw errors when attempting to save a new lobby if validations are not met.
+
+Next add a create route for lobbies. 
+
+![Lobby Create Route](https://i.gyazo.com/27404de3c99e30384c7fc23f19176d97.png)
+
+In your lobbies controller add a create action. This action should create a new lobby and render it as JSON when validations pass OR render the validation errors as JSON when creation fails.
+
+![Lobby Create Action](https://i.gyazo.com/b443f87a6d133d3633ea569c508e1f29.png)
+
+Now everything should be working properly for the backend and error messages should be displaying for bad lobbies. You can test them by using `console.log`.
+
+## React/Redux Front-End
+
+Let's take things to the front-end. Just keep in mind that this tutorial assumes you have a Redux store with Thunk and a form already configured, we will just be adding a new action, reducer and local state for error handling.
+
+Start by creating an add lobby action. This action can go in a file called `lobbyActions.js` and be sure to return the fetch request. 
+
+```
+export const addLobby = (data) => {
+  return dispatch => {
+    return fetch(`${root}/lobbies`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({lobby: data}),
+    })
+    .then(res => {
+      if (res.ok) {
+        return res
+          .json()
+          .then(data =>
+            dispatch({ type: 'ADD_LOBBY', lobby: data })
+          );
+      } else {
+        return res.json().then((errors) => {
+          return Promise.reject(errors);
+        });
+      }
+    })
+  }
+}
+```
+
+In your form component, add state to handle errors. 
+
+You need a key called `error` that should be a boolean with a default value of false, and a key called errorMessages that should be an empty object.
+
+Ignore all other keys in the example below. We are solely focusing on errors for this tutorial.
+
+```
+const [formData, setFormData] = useState(
+    {
+        gamemodeText: "",
+        descriptionText: "",
+        skillText: "",
+        mic: false,
+        hidden: true,
+        error: false,
+        errorMessages: {}
+    }
+)
+```
+
+Make sure you are importing `useState` as well.
+
+```
+import { useState } from 'react'
+```
+
+Now we can set up our error handler. The job of this function is to loop through our error messages and display them in paragraph elements. If there are no errors it returns null.
+
+```
+const handleErrorMessages = () => {
+    const { errorMessages } = formData
+    const keys = Object.keys(errorMessages)
+    if (errorMessages && keys.length > 0 && errorMessages.constructor === Object) {
+        return (
+            keys.map((key) => {
+                return (
+                    errorMessages[key].map(error => {
+                        return (
+                            <p className="mb-4 text-red-500">{error}</p>
+                        )
+                    })
+                )
+            })
+        )
+    } else {
+        return null
+    }
+}
+```
+
+Now create a submit handler for your form. This will create a lobby object and post it to our Rails backend.
+
+```
+const handleOnSubmit = event => {
+    event.preventDefault()
+    const lobby = {
+        user_id: currentUser.id,
+        platform: currentUser.platform,
+        region: currentUser.region,
+        gamemode: formData.gamemodeText,
+        description: formData.descriptionText,
+        mic: formData.mic,
+        skill_level: formData.skillText
+    }
+    addLobby(lobby)
+}
+```
+
+There is a problem with this setup. When the lobby fails to post or rollsback we will not receive any error messages on the frontend.
+
+We need to use `.then` and `.catch`. 
+
+```
+const handleOnSubmit = event => {
+    event.preventDefault()
+    const lobby = {
+        user_id: currentUser.id,
+        platform: currentUser.platform,
+        region: currentUser.region,
+        gamemode: formData.gamemodeText,
+        description: formData.descriptionText,
+        mic_required: formData.mic,
+        skill_level: formData.skillText
+    }
+    addLobby(lobby)
+    .then(() => {
+        setFormData({...formData, descriptionText: "", mic: false })
+        event.target.reset()
+    })
+    .catch((error) => {
+        setFormData({
+            ...formData,
+            error: true,
+            errorMessages: error
+        })
+    })
+}
+```
+
+`.then` will call when our promise is fulfilled successfully. In this case it will reset all form data.
+
+`.catch` will call when our promise is rejected. In this case it will change the <i>error</i> state to true and populate error messages.
+
+![Lobby Errors](https://i.imgur.com/P0Ecf6X.png)
+
+Just one more step! We need to render our errors.
+
+Add this to your components <i>return</i> statement.
+
+```
+{ formData.error && handleErrorMessages() }
+```
+
+Your errors should look something like this.
+
+![Form Error Messages](https://i.imgur.com/rDziK4A.png)
