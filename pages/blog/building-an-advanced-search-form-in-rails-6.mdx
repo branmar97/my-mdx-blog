@@ -1,0 +1,163 @@
+---
+title: Building an Advanced Search Form in Rails 6
+layout: 'post'
+description: A simple search form is great, but one with advanced search options can have many use cases. Can you imagine Amazon with a search form that only accepts item names? Pssh...that sounds like a nightmare to me.
+date: 27/06/2021
+header: https://i.imgur.com/rqa7aLc.png
+---
+
+
+## Introduction
+
+A simple search form is great, but one with advanced search options can have many use cases. Can you imagine Amazon with a search form that only accepts item names? Pssh...that sounds like a nightmare to me.
+
+I prefer to provide more options for my users. Adding more filters can help users narrow down the results and find exactly what they are looking for.
+
+You can use gems like [Ransack](https://github.com/activerecord-hackery/ransack) to build search forms much faster, but for the purpose of learning and performance we will be building this feature ourselves. Throughout the process, you will also learn how to customize Rails default pluralization. By the end, we will be able to search for Pokemon by name, type, and region.
+
+## Before We Dive In 
+
+I recommend testing the application throughout the process. You can run `rails server` in your terminal and visit [localhost:3000](http://localhost:3000) after each feature implementation and see if the application works as expected.
+
+## Getting Started
+
+Let us begin by creating a new Rails app. Execute the following code in your command line:
+
+`rails new PokemonDB`
+
+This will set up the entire Rails directory structure that we need to run our application. Before we do our scaffold, we need to setup Pokemon to have proper pluralization. Since Pokemon is already plural, we do not want Rails to add an 's' after it.
+
+#### pokemondb/config/initializers/inflections.rb
+
+![Code Snippet](https://i.imgur.com/YNgkBw1.png)
+
+Now we can create our first model, Pokemon. Our model will have three strings of name, type, and region. We will generate this using a [scaffold](https://guides.rubyonrails.org/command_line.html#rails-generate), which will generate the database and the basic MVC configuration we need. Feel free to build this without using a scaffold if you want an extra challenge.
+
+**NOTE**: Rails sets attributes as strings by default. Since all of our attributes are strings, we do not need to specify the datatypes.
+
+`rails generate scaffold Pokemon name type region --force-plural`
+
+After your scaffold is built, update the Pokemon class to make 'type' an acceptable attribute for Pokemon. Rails reserves 'type' by default.
+
+#### pokemondb/app/models/pokemon.rb
+
+![Code Snippet](https://i.imgur.com/OX1gxuj.png)
+
+Be sure to follow up with `rails db:migrate` to update the schema. Our application will not run with pending migrations.
+
+## Updating Routes
+
+Now we need to update our [routes](https://guides.rubyonrails.org/routing.html) to change the action for the root page, indicated by a forward slash. Use the 'pokemon#index' action for the root. Update the routes file:
+
+#### pokemondb/config/routes.rb
+
+![Code Snippet](https://i.imgur.com/BtbYxZx.png)
+
+Now our root page should look like this.
+
+![Example](https://i.imgur.com/JIJVxRF.png)
+
+## Test Your Create form
+
+Go ahead and click 'New Pokemon.' Create three or four Pokemon to test the form, then check the index page. This will also provide objects to work with. I prefer this method because I can test my forms and build 'seeds' at the same time.
+
+![Example](https://i.imgur.com/OKrpni1.png)
+
+Once you have added Pokemon, you should see them on the index page. They will be displayed in the order you created them with show, edit, and destroy links. The next step will be to add a basic search form and logic.
+
+## Search By Name
+
+Before we build the advanced search, let us build a basic Pokemon search form to search by name. We will expand on it later.
+
+To build this use the `form_with` tag in the Pokemon index file. If you are using an older version of Rails, `form_tag` will work just fine with a few slight differences. Add the following code to the index view above the Pokemon table.
+
+#### pokemondb/app/views/pokemon/index.html.erb
+
+![Code Snippet](https://i.imgur.com/3eqqTXc.png)
+
+Our form is taking in a path and method. The `text_field_tag` displays a textbox where users can enter a search value, while the submit tag sends the information for us to use and filter results. Here is the [documentation](https://guides.rubyonrails.org/form_helpers.html) if you would like to brush up on forms.
+
+## Basic Search method
+
+It is time to build the search method. Since this is database logic, it will be handled by the model. This method will find Pokemon based on a given name. If no search parameters are provided, then it will display all Pokemon. Update your 'pokemon.rb' file to look like this:
+
+#### pokemondb/app/models/pokemon.rb
+
+![Code Snippet](https://i.imgur.com/BFJxGx2.png)
+
+We will put this new class method to use by calling it in our Pokemon index. The following code will take in search params from the search form we built earlier.
+
+#### pokemondb/app/controllers/pokemon_controller.rb
+
+![Code Snippet](https://i.imgur.com/ozogov0.png)
+
+![Example](https://i.imgur.com/uxi9uXf.png)
+
+The basic search form is now functional. I was able to find Bulbasaur! Time to make this form more useful and interesting.
+
+## Search Model
+
+Next, we will add functionality to search for Pokemon by type and region. This is a bit more advanced and will require a separate model to handle searches. We will use `rails generate`, but this time for a model. This model will have name, type, and region. Be sure to run `rails db:migrate` after generating.
+
+`rails generate model Search name type region`
+
+## Searches Controller
+
+For our advanced search form to work properly, it will need its own [controller](https://guides.rubyonrails.org/action_controller_overview.html). Make sure the controller name is pluralized. Run the following in your terminal, then update your routes.
+
+`rails generate controller searches`
+
+#### pokemondb/config/routes.rb
+
+![Code Snippet](https://i.imgur.com/NPYUMCT.png)
+
+## Controller Actions
+
+The controller will have three [actions](https://guides.rubyonrails.org/action_controller_overview.html) and a 'search_params' private method. Our actions are show, new, and create. Here is the code.
+
+**NOTE**: Older versions of ruby may use `.uniq` rather than `.distinct`. Try them out to see which one throws errors.
+
+#### pokemondb/app/controllers/searches_controller.rb
+
+![Code Snippet](https://i.imgur.com/RnV4KON.png)
+
+## Building a New form
+
+Start by creating a link to our new advanced search form. This can go directly under the standard search form in the Pokemon index view.
+
+#### pokemondb/app/views/pokemon/index.html.erb
+
+`<%= link_to "Advanced Search", new_search_path %>`
+
+You may notice that this link does not go anywhere. We need to create our views in the searches folder! Create the views `new.html.erb` and `show.html.erb`. Make sure they are in the **pokemondb/app/views/searches** directory.
+
+Now we have some empty views. Time to add some code to create new searches. This will be a form with select menus and a submit field.
+
+#### pokemondb/app/views/searches/new.html.erb
+
+![Code Snippet](https://i.imgur.com/Heo3l0T.png)
+
+Our advanced search view should look very clean. Try the 'Advanced Search' link on the index page to see if everything works as expected. Move on to the show view.
+
+#### pokemondb/app/views/searches/show.html.erb
+
+![Code Snippet](https://i.imgur.com/uZdG7mL.png)
+
+You may notice this table is almost identical to the one generated by the scaffold. I decided to use it since it looks clean and easy to read.
+
+## Updating the Search Model
+
+Just like our Pokemon model, the Search model needs a method to find Pokemon. This one will be an instance method that will be called on instances of Search. We have called it in our views with `.search_pokemon`. It is time to build it. Keep in mind that since this model also has a 'type' attribute, we will need to make it an acceptable attribute. We have done this on the second line of the search model.
+
+#### pokemondb/app/models/search.rb
+
+![Code Snippet](https://i.imgur.com/S5fXtPb.png)
+
+## Test the Search
+Everything should work properly! We should have the ability to filter Pokemon by name, type, and region. The various links and buttons we added also allow for great user-friendliness. It is nice to have a link to go back to the previous page and links to alter our Pokemon.
+
+Run your rails server and visit [localhost:3000](http://localhost:3000/) to see everything in action.
+
+![Example](https://i.imgur.com/4u7xLG8.png)
+
+Thank you for reading this tutorial. I hope this can be of use to you in a future Rails project.
