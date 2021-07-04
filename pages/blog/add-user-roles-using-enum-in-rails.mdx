@@ -1,0 +1,88 @@
+---
+title: Add User Roles Using Enum in Rails
+layout: 'post'
+description: Learn how to add user roles to your Ruby on Rails app by using enum. This process is quick and easy to set up and opens the door to add lots of functionality to your app.
+date: 04/07/2021
+header: https://i.imgur.com/8oMpRRO.png
+---
+
+In this blog post we will learn how to set up user roles by using [enum](https://api.rubyonrails.org/v5.2.5/classes/ActiveRecord/Enum.html). This will allow us to use methods like `.admin?` or `.role` to check user roles. 
+
+It can be used to restrict access to certain views or actions.
+
+Let's get started! 
+
+## Install Devise 
+
+We will use [devise](https://github.com/heartcombo/devise) to get our authentication system initialized quickly.
+
+Add `devise` to your Gemfile.
+
+```
+gem 'devise'
+```
+
+Run `bundle install` in your terminal.
+
+Next, run the generator.
+
+```
+rails generate devise:install
+```
+
+Add a configuration to `config/environments/development.rb`
+
+```
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+```
+
+Now we can create our user model. Add `role:integer` after the model name.
+
+```
+rails generate devise User role:integer 
+```
+
+By adding `role:integer` to our generator, we skip needing to create a migration and add our role column later. 
+
+Now we have a User model with a role column. We need to edit this column.
+
+Go to your migrations directory and find your Users table migration. 
+
+Change `t.integer :role` to `t.integer :role, :default => 0`
+
+This will set our default role value to 0.
+
+Run `rails db:migrate`.
+
+## Add Enum 
+
+Now that the authentication is set up, we can add [enum](https://api.rubyonrails.org/v5.2.5/classes/ActiveRecord/Enum.html). It will go in the user model.
+
+```
+enum role: [:standard, :admin]
+```
+
+Just to clarify:
+
+- Role: A column in the users table that stores an integer.
+- Enum: Maps the given role values to integers in the database.
+
+Our roles are `[:standard, :admin]` and they are mapped to 0 and 1.
+
+Next, run `rails c` to start the console and create a new user.
+
+```
+user = User.create(email: test@test.com, password: password, role: 0)
+```
+
+Type `user.role`, and it should return `standard`.
+
+```
+user.role 
+
+=> "standard"
+```
+
+Thanks for reading my blog post.
+
+You can learn more about enum in the [official Ruby on Rails documentation](https://guides.rubyonrails.org/).
