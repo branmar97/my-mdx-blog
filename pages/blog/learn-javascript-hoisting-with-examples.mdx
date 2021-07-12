@@ -1,0 +1,86 @@
+---
+title: Learn JavaScript Hoisting with Examples
+layout: 'post'
+description: JavaScript has lots of behaviors that throw off new developers. Hoisting is one of the behaviors that creates confusion and can be tricky to wrap your head around. In this blog post, learn about hoisting and how to avoid some common errors.
+date: 11/07/2021
+header: https://i.imgur.com/83sRMop.png
+---
+
+Hoisting can produce very unexpected results in your code. In this blog post, we will learn about what hoisting is, and how to avoid some common errors caused by it.
+
+Typically, in JavaScript you will make your declarations before calling on them like in the example below:
+
+```
+let fruit = "apple"
+let sport = "football"
+
+console.log(fruit + " and " + sport)
+
+=> "apple and football"
+```
+
+However, hoisting allows us to flip things around:
+
+```
+console.log(season)
+
+let season;
+
+=> undefined
+```
+
+Hoisting is the default behavior in JavaScript. It is when the browser takes all the declarations, including named functions, and places them at the top of the file to be accessed at any point.
+
+In the example above, we were able to log season without any reference error even though it was declared under the console.log. This is because JavaScript allows variables to be defined without a value and the declaration was "hoisted" to the top.
+
+Want to see something strange? Take a look at this:
+
+```
+console.log(season)
+
+let season = "Summer"
+
+=> undefined
+```
+
+We assigned a string value of "Summer" to season, yet we still received undefined in our console log. This is because when the browser hoists the declaration to the top of the file, it does not bring the value with it.
+
+Therefore, the console log is being called before the browser even begins the assignment. You can fix this by moving the console log below the assignment.
+
+```
+let season
+season = "Summer"
+
+console.log(season)
+
+=> "Summer"
+```
+
+Now we get our expected output, but how does this work with named functions?
+
+```
+console.log(food)
+
+function food() {
+    let item = "Spare ribs"
+    return item
+}
+
+=> "Spare ribs"
+```
+
+Exactly the same way! Named functions get hoisted to the top of the file, much like variables. We can declare our function above or below the console log and get the same result.
+
+While this technique works, it is not best practice. You want to avoid hoisting unless it is absolutely necessary.
+
+Here are a few reasons to avoid hoisting:
+
+1. Takes up space inside the browser and increases loading time
+2. Can produce unexpected results when a variable is initialized but assigned a value in a different part of the file
+3. You can easily avoid hoisting by declaring variables at the top of the scope, declaring variables within functions, or using anonymous functions
+
+
+
+
+
+
